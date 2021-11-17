@@ -1,0 +1,145 @@
+Laravel 
+
+1.composer => is used only for installing php packages
+
+	composer require <package_name>
+	composer show
+	composer install
+	composer update
+	** packagist.com we can download packages **
+
+
+   vendor folder store packages we install.
+   composer.json show packages and its version.
+   if we wrongly delete vendor folder, can run "composer.install".
+   if we edit packages version in composer.json, we need to run "composer.update".
+
+
+2. Laravel installation
+
+	composer create-project larvel/laravel <project_name>
+
+
+3. Artisan useful commands
+	php artisan serve (for running project)
+	php artisan --version (show laravel version)
+	php artisan list (show artisan commands)
+
+4.Folder structure
+	Model 		=> app->model
+	Controller 	=> app->Http->Controllers
+	Middleware	=> app->Http->Middlewares
+	kernel.php	=> to register Middlewares
+	view 		=> resources->views
+	Route 		=> routes->web.php and api.php
+	Public 		=> public
+Migration,Factory,Seed	=> database->migrations
+	Provider	=> app/Providers(focus on Appserviceprovider.php)
+	config		=> config (focus on app.php)
+	.env		=> to connet db and other 
+	package.json and composer.json
+
+
+5. Route
+
+	i. 		get route
+	ii. 	route parameter
+	iii. 	view route
+	iv. 	route_name and url
+	v. 		route -> Controller	
+	vi.     route -> Controller -> view
+
+
+6. views
+	view is blade template engine, .blade.php extension
+	* {{}} is used to show php code within htmls
+	* @if @endif and so on , can see in documentation
+
+
+7. Form request and response
+	get method
+	post method ('csrd' need, if not , error 419)
+	send data with view file
+			or 
+	send data with 'with' and 'session'
+
+
+8. Form validation
+	checking from 'Request'...
+	showing error showing message in view file (read documentation)
+	reading validation rules in documentation
+
+9. Model (MVC) database
+
+	i.		db create and register in .env file
+	ii.		create table with data type (php artisan make:migration <table_name>)
+	iii.	Database
+			CRUD (save() | get(),all(),first(),last() | update() | delete())
+
+10. Tinker
+	*** Use 'Model' ***
+	- Can use methods in eloquent collection (read details in documentation)
+	  For example:
+	  all()				=>			App\Item::all();
+	  get()				=>			App\Item::where('id','<',12)->get();
+	  where()
+	  find()			=>			App\Item::find(12);   | can only find 'id'
+	  orderBy()
+	  latest()->get()
+	  first()			=>			App\Item::first()->get();
+	  last()
+	  insert()			=>			App\Item::insert(["name=>'saimon','age'=>24"]);
+	  update()			=> 			$item1 = App\Item::find(1);  |  $item1->name = "saimon"; | $item1->update();
+	  delete()			=>			App\Item::find(2)->delete();
+
+
+11.	Migration commands
+	php artisan migrate
+	php artisan migrate:fresh 					(delete all data in tables)
+	php artisan migrate:rollback				(go step before migrate)
+	php artisan migrate:rollback --step=2		(go two steps before migrate)
+
+
+12. Fake data seeding
+	First 	=> Factory 			=> declaring data what we want to insert
+	Second 	=> Seeder 			=> declaring how many fake data we want to get
+	Third	=> DatabaseSeeder 	=> register Seeder we created
+	Finally, we got fake data.
+
+
+13. Authentication (Auth)
+	Run "php aritsan make:auth", increase 
+	i.   /Controllers/Homecontroller.php
+	ii.  /views/auth
+	iii. /views/home.blade.php
+	iv.	 'login' and 'register' button will appear in laravel home page
+	v.   In 'web.php',Auth::routes();
+
+	Above files will appear.
+
+
+14. Middleware
+	i.		create middleware (php artisan make:middleware <name>)
+	ii.		assign middleware (in kernel.php)
+
+15. Api basic
+	- 'api.php' is used
+	- when calling in browser, use always '/api/----'
+	  For exampe,
+	  		/api/item   	=> get all data
+			/api/item/{id}  => get one data
+	- can use 'get' and 'post' method
+
+	RestApi (Representatioal state transfer)
+		Creating model,controller,Factory,migration,apiController in two commands.
+		For example,
+		-	php artisan make:model Photo --all
+		-	php artisan make:controller PhotoApiController --api --model=Photo
+		    In api.php, register 'Route::apiResource('/photo','PhotoApiController');'
+	
+	
+
+
+
+	
+	
